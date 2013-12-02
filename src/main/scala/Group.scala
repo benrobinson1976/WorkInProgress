@@ -1,8 +1,6 @@
 package main.scala
 
-trait Group[A] {
-  def zero : A
-  def combine(a: A, b: A) : A
+trait Group[A] extends Monoid[A]{
   def subtract(a: A, b: A) : A
   def inverse(a: A) : A
 }

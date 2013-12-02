@@ -4,15 +4,8 @@ import org.scalacheck.{Properties, Gen}
 import org.scalacheck.Prop.forAll
 import main.scala.Monoid
 
-/**
- * Created with IntelliJ IDEA.
- * User: brobinson3
- * Date: 11/15/13
- * Time: 12:07 PM
- * To change this template use File | Settings | File Templates.
- */
 
-case class IntMonoid(a: Int, b: Int) {
+case class IntMonoid(a: Int, b: Int) extends Monoid[Int]{
   def zero = 0
   def combine(a: Int, b: Int): Int = a + b
 }

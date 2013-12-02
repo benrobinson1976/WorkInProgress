@@ -5,7 +5,7 @@ import org.scalacheck.Prop._
 import org.scalacheck.{Properties, Gen}
 import main.scala.Group
 
-case class IntMod7(ints: Int*) {
+case class IntMod7(ints: Int*) extends Group[Int]{
   def zero = 7
   def combine(a: Int, b: Int): Int = {
     (a + b) % zero
