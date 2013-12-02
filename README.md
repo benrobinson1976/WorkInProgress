@@ -1,3 +1,3 @@
-# Monoids
+# ADTs
 
-Quick test for monoids as an abstract data type
+Preliminary generative tests for monoid and group as algebraic data types

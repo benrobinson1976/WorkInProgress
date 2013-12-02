@@ -42,13 +42,6 @@ object GroupSpec extends Properties("Group laws"){
     }
   }
 
-  println("combo 1: " + intMod7.combine(6, intMod7.combine(8,16387)))
-  println("combo 2: " + intMod7.combine(intMod7.combine(6,8),16387))
-
-  println("identity: " + intMod7.combine(6, intMod7.zero))
-
-  println("inverse: " + intMod7.inverse(5))
-
   property("group identity") = forAll{(a: Int) =>
     (a > 0) ==> (intMod7.combine(a, intMod7.zero) == (a % intMod7.zero))
 
