@@ -1,0 +1,48 @@
+*.class
+*.log
+*.jar
+
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+
+# Leiningen
+/classes
+/lib
+/native
+/checkouts
+/target
+.lein-deps-sum
+.lein-failures
+.lein-repl-history
+.lein-cljsbuild-rep
+/.lein-plugins
+repl-port
+
+# Temp Files
+*.orig
+*~
+.*.swp
+.*.swo
+*.tmp
+*.bak
+
+# Editors (IntelliJ / Eclipse)
+.idea/
+.idea_modules/
+*.classpath
+*.project
+.settings/
+*.iml
+# OS X
+.DS_Store
+
+# Directories
+data/

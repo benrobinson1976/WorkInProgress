@@ -13,6 +13,7 @@ case class IntMonoid(a: Int, b: Int) extends Monoid[Int]{
 case class StringMnd(s: String*) {
   def zero = ""
   def combine(a: String, b: String):String = a + b
+
 }
 
 object MonoidSpec extends Properties("Monoid laws"){
@@ -21,6 +22,8 @@ object MonoidSpec extends Properties("Monoid laws"){
     def zero = ""
     def combine(a: String, b: String):String = a + b
   }
+
+  def fold[A](as: A*)(implicit m:Monoid[A]) = as.foldLeft(m.zero)(m.combine(_,_))
 
   property("string monoid associativity") = forAll { (a: String, b: String, c: String) =>
     stringMonoid.combine(a,stringMonoid.combine(b,c)).equals(stringMonoid.combine(stringMonoid.combine(a,b),c)) }
@@ -51,6 +54,10 @@ object MonoidSpec extends Properties("Monoid laws"){
     }
 
   }
+//
+//  property("test fold") = forAll() { (s: String, t: String, u: String) =>
+//      fold((s,t),u).equals(fold(s,(t,u)))
+//  }
 
 //  property("failure") = forAll{ (a: String, b: String) =>
 //    a.reverse == b}
