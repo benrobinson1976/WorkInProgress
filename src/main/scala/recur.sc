@@ -15,8 +15,7 @@ def factorial(i:Int): Int = {
     helper(i, 1)
   }
 }
-factorial(17)
-
+factorial(13)
 
 
 
