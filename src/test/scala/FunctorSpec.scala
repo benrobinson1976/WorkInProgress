@@ -2,11 +2,12 @@ package test.scala
 
 import org.scalacheck.Prop._
 import org.scalacheck.{Properties, Gen}
+import main.scala.Functor
 import test.scala.Boxed
 
 
-case class Boxed[A](val t: A) {
-  def fmap[A,B](f:A => B)(ab: Boxed[A]): Boxed[B] = new Boxed(f(ab.t))
+case class Boxed[A](val t: A) extends Functor[Boxed] {
+  def fmap[A,B](f:A => B):Boxed[A] => Boxed[B] =(ab: Boxed[A]) => new Boxed(f(ab.t))
   def id[A](a:A): Boxed[A] = new Boxed[A](a)
   override def toString(): String = t.toString
 }
@@ -22,7 +23,7 @@ object FunctorSpec extends Properties("Functor laws"){
 
   property("Functor preserves structure of homomorphism") = forAll(functorGen) { (input: (Boxed[String], String)) =>
     input match {
-      case(m, x) => m.fmap(length _ compose toUpper _)(m).t equals (m.fmap(length) _ compose m.fmap(toUpper) _)(m).t
+      case(m, x) => m.fmap(length _ compose toUpper)(m).t equals (m.fmap(length _) compose m.fmap(toUpper))(m).t
     }
   }
 
