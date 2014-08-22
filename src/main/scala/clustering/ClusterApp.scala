@@ -5,11 +5,15 @@ import java.io.File
 import akka.actor.{ActorLogging, Props, ActorSystem, Actor}
 import breeze.linalg._
 import breeze.linalg.svd.SVD
+import breeze.stats._
+import breeze.optimize._
+import breeze.numerics._
 import clustering.ClusterAppProtocol.{SVDRequest, FileFromActor}
 import scala.concurrent.Await
 import akka.pattern.ask
 import akka.util.Timeout
 import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 
 object ClusterAppProtocol {
 
@@ -43,7 +47,7 @@ class FileActor extends Actor with ActorLogging {
       sender ! csvread(new File(msg))
     }
     case _ => {
-      log.info("I didn't get a file")
+      log.info("PROBLEM! I didn't get a file")
     }
   }
 }
@@ -96,11 +100,12 @@ object ClusterApp extends App {
   val svdActor = system.actorOf(Props[AppSVDActor], "svdActor")
 
   implicit val timeout = Timeout(2 seconds)
-  //  svdActor ! SVDRequest.apply("src/main/resources/svd.csv")
-  //  Thread.sleep(1000)
-  val future = svdActor ? SVDRequest.apply("src/main/resources/svd.csv")
-  Await.result(future, timeout.duration)
+  svdActor ! SVDRequest.apply("src/main/resources/svd.csv")
+  Thread.sleep(1000)
+  //  val future = svdActor ? SVDRequest.apply("src/main/resources/svd.csv")
+  //  Await.result(future, timeout.duration)
   //println(res1)
+
 
 
 
